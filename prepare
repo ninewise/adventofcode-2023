@@ -20,7 +20,6 @@ case "day${day}part${part}" in
 day02part*)
 	check_python
 	cp day02.py run
-	printf 'p%d("%s")\n' "$part" "$input" >> run
 	chmod u+x run
 	;;
 day03*)

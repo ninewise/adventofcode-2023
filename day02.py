@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import sys
+
 def games(filename):
 	with open(filename) as f:
 		for line in f:
@@ -27,3 +29,8 @@ def power(subsets):
 
 def p2(filename):
 	print(sum(power(subsets) for _, subsets in games(filename)))
+
+if sys.argv[2] == "1":
+	p1(sys.argv[3])
+else:
+	p2(sys.argv[3])
