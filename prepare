@@ -1,0 +1,30 @@
+#!/bin/sh
+day="$1"
+part="$2"
+input="$3"
+
+day="$(printf '%02d' "${day##0}")"
+
+check_python() {
+	case "$(/usr/bin/env python -V)" in
+	"Python 3"*) ;;
+	*) echo "no python 3.* :-("; exit 1;;
+	esac
+}
+
+check_c() {
+	/usr/bin/env cc -v 2>/dev/null || { echo "no cc :-("; exit 1; }
+}
+
+case "day${day}part${part}" in
+day02part*)
+	check_python
+	cp day02.py run
+	printf 'p%d("%s")\n' "$part" "$input" >> run
+	chmod u+x run
+	;;
+day03*)
+	check_c
+	/usr/bin/env cc -g "day${day}part${part}.c" -o run
+	;;
+esac
