@@ -16,6 +16,10 @@ check_c() {
 	/usr/bin/env cc -v 2>/dev/null || { echo "no cc :-("; exit 1; }
 }
 
+check_rust() {
+	rustc >/dev/null 2>&1 || { echo "no rustc :-("; exit 1; }
+}
+
 case "day${day}part${part}" in
 day02part*)
 	check_python
@@ -25,5 +29,9 @@ day02part*)
 day03*)
 	check_c
 	/usr/bin/env cc -g "day${day}part${part}.c" -o run
+	;;
+day10*)
+	check_rust
+	rustc -O day10.rs -o run
 	;;
 esac
